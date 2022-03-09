@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement, incrementByAmount } from "./counterSlice";
 
-function App() {
+export default function App() {
+  const count = useSelector((state) => state.counter.value);
+  const dispatch = useDispatch();
+
+  const handleIncrement = () => {
+    dispatch(increment());
+  };
+  const handleDecrement = () => {
+    dispatch(decrement());
+  };
+
+  const handleİncrementByAmount = () => {
+    dispatch(incrementByAmount(5));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>You count : {count}</h1>
+      <button onClick={handleIncrement}>increment</button>
+      <button onClick={handleDecrement}>decrement</button>
+      <button onClick={handleİncrementByAmount}>increment +10</button>
     </div>
   );
 }
 
-export default App;
+// store içindeki state i getirmek için useSelector isimli bir hook kullanmamız gerekiyor.
